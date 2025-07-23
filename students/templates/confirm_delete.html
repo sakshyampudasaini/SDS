@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Confirm Delete</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f6f8; color: #333; padding: 20px; text-align: center; }
+        .box { background: white; padding: 30px; margin: auto; display: inline-block; border-radius: 8px; box-shadow: 0 0 10px #ccc; min-width: 300px; }
+        button, a { margin: 10px; padding: 10px 25px; border-radius: 4px; text-decoration: none; font-weight: bold; }
+        button { background: #e74c3c; color: white; border: none; cursor: pointer; }
+        button:hover { background: #c0392b; }
+        a { background: #3498db; color: white; }
+        a:hover { background: #2980b9; }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h2>Are you sure you want to delete "{{ object }}"?</h2>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Yes, Delete</button>
+        <a href="{% url 'students:student_list' %}">Cancel</a>
+    </form>
+</div>
+
+</body>
+</html>

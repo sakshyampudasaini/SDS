@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Students List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            color: #333;
+            padding: 20px;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 0 10px #ccc;
+        }
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        a.nav-link {
+            color: white;
+            margin: 0 15px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        a.nav-link:hover {
+            text-decoration: underline;
+        }
+        .container {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<nav style="background:#3498db; padding:10px; text-align:center;">
+    <a href="{% url 'home' %}" class="nav-link">Home</a>
+    <a href="{% url 'students:student_list' %}" class="nav-link">Students List</a>
+    <a href="{% url 'students:add_student' %}" class="nav-link">Add Student</a>
+    {% if user.is_authenticated %}
+        <a href="{% url 'logout' %}" class="nav-link">Logout</a>
+    {% else %}
+        <a href="{% url 'login' %}" class="nav-link">Login</a>
+    {% endif %}
+</nav>
+
+<div class="container">
+    <h1>Students Directory</h1>
+    {% if students %}
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Roll No</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+            <tr>
+                <td>{{ student.name }}</td>
+                <td>{{ student.email }}</td>
+                <td>{{ student.roll_no }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>No students found.</p>
+    {% endif %}
+</div>
+
+</body>
+</html>
